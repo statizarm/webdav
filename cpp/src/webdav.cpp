@@ -146,11 +146,23 @@ WebDavManager::replyFinished(QNetworkReply *reply)
 
     if (dataIO != nullptr)
     {
-        dataIO->write (reply->readAll());
+        if (!dataIO->isOpen())
+        {
+            dataIO->open(QIODevice::OpenModeFlag::WriteOnly);
+        }
 
-        static_cast<QFile *> (dataIO)->flush();
+        if (dataIO->isOpen())
+        {
+            dataIO->write (reply->readAll());
 
-        dataIO->close ();
+            QFile *file = dynamic_cast<QFile *> (dataIO);
+            if (file)
+            {
+                file->flush ();
+            }
+
+            dataIO->close ();
+        }
 
         delete dataIO;
     }

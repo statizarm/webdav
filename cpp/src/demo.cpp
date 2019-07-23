@@ -1,7 +1,7 @@
 #include "cpp/include/demo.h"
 #define TEST_FILE_NAME "/test"
 #define TEST_FILE_VALUE "hello, world!!!"
-#define TEST_DIR_NAME "/test/"
+#define TEST_DIR_NAME "/testdir/"
 
 
 Demo::Demo (QWidget *parent) :
@@ -13,7 +13,7 @@ Demo::Demo (QWidget *parent) :
                                "webdav.yandex.ru",
                                "/",
                                "login",
-                               "pswrd",
+                               "pswd",
                                443);
 
     vertLayout = new QVBoxLayout (this);
@@ -51,8 +51,8 @@ Demo::testPutCmd ()
 void
 Demo::testGetCmd ()
 {
-    QIODevice *buf = new QBuffer;
-    wd->get (TEST_FILE_NAME, buf);
+    QFile *file = new QFile ("/home/art/projects/webdavclient" TEST_FILE_NAME);
+    wd->get (TEST_FILE_NAME, file);
     testLabel->setText ("hmm");
 }
 

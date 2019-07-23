@@ -1,7 +1,10 @@
 QT += core network widgets
 
 SOURCES += \
-            cpp/src/*.cpp
+            cpp/src/main.cpp\
+            cpp/src/demo.cpp\
+            cpp/src/webdav.cpp
 
 HEADERS += \
-            cpp/include/*.h
+            cpp/include/demo.h\
+            cpp/include/webdav.h
